@@ -128,3 +128,11 @@
     @apply font-sans;
   }
 }
+
+.gradient {
+  @apply bg-gradient-to-b from-emerald-600 to-teal-200;
+}
+
+.gradient-title{
+  @apply bg-gradient-to-b from-emerald-600 to-teal-200 font-bold text-transparent bg-clip-text pb-1 pr-2;
+}

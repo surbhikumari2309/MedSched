@@ -1,5 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import {
+    SignedIn,
+    SignedOut,
+    SignInButton,
+    SignUpButton,
+    UserButton,
+} from "@clerk/nextjs";
 // import React from "react";
 
 const Header= () => {
@@ -15,6 +22,17 @@ const Header= () => {
                        className= "h-12 w-auto object-contain"
                        priority/>
                 </Link>
+
+                {/* <div className="flex items-center gap-3">
+                    <SignedOut>
+                        <SignInButton />
+                        <SignUpButton />
+
+                    </SignedOut>
+                    <SignedIn>
+                        <UserButton />
+                    </SignedIn>
+                </div> */}
             </nav>
         </header>
     );
