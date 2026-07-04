@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/ui/theme-provider";
 import Header from "@/components/ui/header";
 import { dark } from "@clerk/themes";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "sonner";
 
 const inter= Inter({ subsets: ["latin"]});
 
@@ -36,6 +37,7 @@ export default function RootLayout({ children }) {
     >
       <Header />
       <main className="pt-24 min-h-screen">
+        <Toaster richColors/>
         {children}
       </main>
 
