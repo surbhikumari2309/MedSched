@@ -39,3 +39,22 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+# Prisma Client (Custom Generated)
+/lib/generated/
+
+# Turbopack Cache
+/.turbo/
+
+# Editor Settings (VS Code)
+/.vscode/
+
+# Misplaced Build Artifacts
+/hooks/.next/
+
+# Windows system files
+Thumbs.db
+ehthumbs.db
+
+.gitignore*

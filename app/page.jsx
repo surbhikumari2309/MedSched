@@ -126,7 +126,7 @@ export default function Home() {
 
                       </h2>
                       <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                        Hear from patients and doctors who use our platform
+                        Hear from patients and doctors who use our platform. Know what they think, how they feel, what they say, in all in one secure platform made simple just for you with MedSched
                       </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -136,7 +136,7 @@ export default function Home() {
                         key={index}
                         className= "border-emerald-90/20 hover:border-emerald-800/40 transition-all duration-300"
                       >
-                        <cardContent className= "pt-6">
+                        <CardContent className= "pt-6">
                           <div className="flex items-center mb-4">
                             <div className= "w-12 h-12 rounded-full bg-emerald-900/20 flex items-center justify-center mr-4">
                                 <span className= "text-emerald-600 font-bold">
@@ -155,7 +155,7 @@ export default function Home() {
                               &quot;{testimonial.quote}&quot;
                             </p>
 
-                        </cardContent>
+                        </CardContent>
                         
                       
                       </Card>
@@ -181,10 +181,10 @@ export default function Home() {
                     <div className="text-3xl md:text-4xl font-bold text-white mb-6">
                       <Button
                          size="lg"
-                         className="ng-emerald-600 text-white hover:bg-emerald-700"
+                         className="bg-emerald-600 text-white hover:bg-emerald-700"
                          asChild
                       >
-                        <Link href= " ">Sign Up Now</Link>
+                        <Link href= "/onboarding">Sign Up Now</Link>
                       </Button>
                       <Button
                          asChild
