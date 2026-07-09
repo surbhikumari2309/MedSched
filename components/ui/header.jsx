@@ -10,12 +10,13 @@ import {
     useUser,
 } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
-import { ShieldCheck, Stethoscope, Calendar, User } from "lucide-react";
+import { ShieldCheck, Stethoscope, Calendar, User, Coins } from "lucide-react";
 import { getCurrentUser } from "@/actions/onboarding";
 
 const Header = () => {
     const { isSignedIn, isLoaded } = useUser();
     const [userRole, setUserRole] = useState(null);
+    const [userCredits, setUserCredits] = useState(0);
 
     useEffect(() => {
         if (isSignedIn) {
@@ -23,17 +24,19 @@ const Header = () => {
                 try {
                     const dbUser = await getCurrentUser();
                     setUserRole(dbUser?.role || "UNASSIGNED");
+                    setUserCredits(dbUser?.credits || 0);
                 } catch (error) {
-                    console.error("Failed to fetch user role:", error);
+                    console.error("Failed to fetch user data:", error);
                 }
             };
             fetchUserRole();
         } else {
             setUserRole(null);
+            setUserCredits(0);
         }
     }, [isSignedIn]);
 
-    // Role display variables based on Clerk's load state
+    
     const showAdmin = isLoaded && isSignedIn && userRole === "ADMIN";
     const showDoctor = isLoaded && isSignedIn && userRole === "DOCTOR";
     const showPatient = isLoaded && isSignedIn && userRole === "PATIENT";
@@ -85,18 +88,29 @@ const Header = () => {
                     )}
 
                     {showPatient && (
-                        <Link href="/appointments">
-                            <Button
-                               variant="outline"
-                               className="hidden md:inline-flex items-center gap-2"
-                            >
-                                <Calendar className="h-4 w-4" />
-                                My Appointments
-                            </Button>
-                            <Button variant="ghost" className="md:hidden w-10 h-10 p-0">
-                                <Calendar className="h-4 w-4" />
-                            </Button>
-                        </Link>
+                        <>
+                            <Link href="/pricing" className="hidden md:inline-flex">
+                                <Button
+                                   variant="outline"
+                                   className="border-amber-900/30 bg-amber-950/10 text-amber-400 items-center gap-1.5"
+                                >
+                                    <Coins className="h-4 w-4 text-amber-500" />
+                                    <span>{userCredits} Credits</span>
+                                </Button>
+                            </Link>
+                            <Link href="/appointments">
+                                <Button
+                                   variant="outline"
+                                   className="hidden md:inline-flex items-center gap-2"
+                                >
+                                    <Calendar className="h-4 w-4" />
+                                    My Appointments
+                                </Button>
+                                <Button variant="ghost" className="md:hidden w-10 h-10 p-0">
+                                    <Calendar className="h-4 w-4" />
+                                </Button>
+                            </Link>
+                        </>
                     )}
 
                     {showUnassigned && (
