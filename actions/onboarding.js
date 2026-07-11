@@ -3,28 +3,33 @@
 import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
+import { checkUser } from "@/lib/checkUser";
+
 
 export async function setUserRole(formData) {
     const { userId } = await auth();
-
 
     if (!userId) {
         throw new Error("unauthorized");
     }
 
-    const user = await db.user.findUnique({
+    let user = await db.user.findUnique({
         where: { clerkUserId: userId },
     });
+
+    if (!user) {
+        user = await checkUser();
+    }
 
     if (!user) throw new Error("User not found in database");
 
     const role = formData.get("role");
 
-    if (!role || !["PATIENT", "DOCTOR"] .includes(role)) {
+    if (!role || !["PATIENT", "DOCTOR"].includes(role)) {
         throw new Error("Invalid role selection");
     }
 
-    try{
+    try {
         if (role === "PATIENT") {
             await db.user.update({
                 where: {
@@ -36,16 +41,16 @@ export async function setUserRole(formData) {
             });
 
             revalidatePath("/");
-            return { success:true, redirect: "/doctors" };
+            return { success: true, redirect: "/doctors" };
         }
 
-        if (role === "DOCTOR" ) {
-            const specialty= formData.get("specialty");
-            const experience= parseInt(formData.get("experience"), 10);
+        if (role === "DOCTOR") {
+            const specialty = formData.get("specialty");
+            const experience = parseInt(formData.get("experience"), 10);
             const credentialUrl = formData.get("credentialUrl");
             const description = formData.get("description");
 
-            if ( !specialty || !experience || !credentialUrl || !description ) {
+            if (!specialty || !experience || !credentialUrl || !description) {
                 throw new Error("All fields are required");
             }
 
@@ -53,14 +58,14 @@ export async function setUserRole(formData) {
                 where: {
                     clerkUserId: userId,
                 },
-            data: {
-                role: "DOCTOR",
-                specialty,
-                experience,
-                credentialUrl,
-                description,
-                verificationStatus: "PENDING",
-            },
+                data: {
+                    role: "DOCTOR",
+                    specialty,
+                    experience,
+                    credentialUrl,
+                    description,
+                    verificationStatus: "PENDING",
+                },
             });
 
             revalidatePath("/");
@@ -80,9 +85,13 @@ export async function getCurrentUser() {
     }
 
     try {
-        const user = await db.user.findUnique({
+        let user = await db.user.findUnique({
             where: { clerkUserId: userId },
         });
+
+        if (!user) {
+            user = await checkUser();
+        }
 
         return user;
     } catch (error) {

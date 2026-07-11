@@ -41,9 +41,19 @@ export default function RootLayout({ children }) {
         {children}
       </main>
 
-      <footer className="bg-muted/50 py-12">
-        <div className="container mx-auto px-4 text-center">
-          Footer
+      <footer className="bg-muted/20 border-t border-emerald-950/20 py-8 mt-auto">
+        <div className="container mx-auto px-4 text-center space-y-3">
+          <p className="text-emerald-400 font-bold text-lg flex items-center justify-center gap-2">
+            MedSched
+          </p>
+           <p className="text-muted-foreground text-sm max-w-md mx-auto">
+             Book appointments, consult online, and manage your healthcare journey in one secure platform.
+           </p>
+            <div className="border-t border-emerald-950/10 w-24 mx-auto my-2"></div>
+            <p className="text-xs text-muted-foreground">
+               {new Date().getFullYear()} MedSched. All rights reserved.
+            </p> 
+          
         </div>
       </footer>
     </ThemeProvider>
