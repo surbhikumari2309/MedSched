@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+
 import { updateDoctorStatus } from "@/actions/admin";
 import{
   Card,
@@ -24,7 +24,7 @@ import {
 import useFetch from "@/hooks/use-fetch";
 import { format } from "date-fns";
 import { ExternalLink, FileText, Medal, User, X, Check } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BarLoader } from "react-spinners";
 
 const PendingDoctors = ({ doctors }) => {
