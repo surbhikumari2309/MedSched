@@ -57,3 +57,28 @@ export async function buyCredits(packageId) {
         throw new Error("Failed to purchase credits: " + error.message);
     }
 }
+
+export async function getUserTransactions(){
+    const { userId } = await auth();
+    if (!userId) return { transactions: [] };
+ 
+    try {
+        const user = await db.user.findUnique({
+            where: { clerkUserId: userId }
+        });
+ 
+        if (!user) return { transactions: [] };
+
+        const transactions = await db.creditTransaction.findMany({
+             where: { userId: user.id },
+             orderBy: { createdAt: "desc" }
+        });
+ 
+        return { transactions };
+     } catch (error) {
+         console.error("Failed to fetch transactions:", error);
+         return { transactions: [] };
+     }
+ }
+
+
