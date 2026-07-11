@@ -1,11 +1,22 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { SPECIALTIES } from "@/lib/specialities";
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import React from "react";
 
 const SpecialitiesPage = () => {
     return (
+        
         <>
+           <div className="flex justify-start mb-6">
+            <Link
+              href="/"
+              className="flex items-center text-muted-foreground hover:text-white transition-colors"
+            >
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Back to Home
+            </Link>
+           </div>
             <div className="flex flex-col items-center justify-center mb-8 text-center">
                 <h1 className="text-3xl font-bold md:text-4xl mb-2 gradient-title">Find Your Doctor</h1>
                 <p className="text-muted-foreground text-white text-lg">

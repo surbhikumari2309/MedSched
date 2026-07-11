@@ -31,7 +31,7 @@ export default function Home() {
                 Connect with <br /> Doctors <br />{" "} <span className="gradient-title"> anytime, anywhere!</span></h1>
 
                 <p className= "text-muted-foreground text-lg md:text-xl max-w-md text-white">
-                  Book appointments, consult online and manage your healthcare journey in all in one secure platform.
+                  Book appointments online and manage your healthcare journey.
                 </p> 
                 <div className="flex flex-col sm:flex-row gap-4 mt-4"
                 >
@@ -62,7 +62,7 @@ export default function Home() {
             </div>
           <div className="relative h-[300px] lg:h-[600px] rounded-xl overflow-hidden mt-4">
             <Image 
-              src="/banner2.0.jpeg"
+              src="/banner2.0.jpg"
               alt="Doctor consultation"
               fill
               priority
@@ -77,9 +77,12 @@ export default function Home() {
           <section className="py-20 bg-muted/30">
               <div className="container mx-auto px-4">
                 <div className="text-center mb-16">
-                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">How it works?</h2>
+                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                    What it does?
+                  </h2>
                   <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                    Our platform makes healthcare accessible with just a few clicks
+                    Our platform makes healthcare accessible with just a few clicks.
+                    It lets you book appointments and connect with doctors.
                   </p>
 
 
@@ -96,13 +99,7 @@ export default function Home() {
                           <CardTitle className="text-xl font-semibold text-white">{feature.title}</CardTitle>
                           <CardDescription>{feature.description}</CardDescription>
                         </CardHeader>
-                        <CardContent
-                          >
-                            <p className="text-muted-foreground">
-                              {feature.description}
-
-                            </p>
-                        </CardContent>
+                        
                       </Card>
                     )
                   })}
@@ -178,7 +175,7 @@ export default function Home() {
                       Get started today and experience healthcare the way it should be.
                     </p>
 
-                    <div className="text-3xl md:text-4xl font-bold text-white mb-6">
+                    <div className="flex flex-col sm:flex-row gap-4 mt-6">
                       <Button
                          size="lg"
                          className="bg-emerald-600 text-white hover:bg-emerald-700"

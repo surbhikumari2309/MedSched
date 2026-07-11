@@ -1,6 +1,19 @@
+"use server";
+
 import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { addDays, addMinutes, endOfDay, format, isBefore } from "date-fns";
+import { deductCreditsForAppointment } from "./credits";
+import { revalidatePath } from "next/cache";
+import { Vonage } from "@vonage/server-sdk";
+import { Auth } from "@vonage/auth";
+
+const credentials = new Auth({
+    applicationId: process.env.NEXT_PUBLIC_VONAGE_APPLICATION_ID,
+    privateKey: process.env.VONAGE_PRIVATE_KEY,
+});
+
+const vonage= new Vonage(credentials, {});
 
 export async function getDoctorById(doctorId) {
     try {
@@ -41,8 +54,8 @@ export async function getAvailableTimeSlots(doctorId) {
         });
 
         if (!availability) {
-            throw new Error("No availability set by doctor");
-        }
+             return { days: [] };
+         }
 
         const now = new Date();
         const days = [now, addDays(now, 1), addDays(now, 2), addDays(now, 3)];

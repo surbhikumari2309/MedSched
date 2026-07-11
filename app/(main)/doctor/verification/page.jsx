@@ -1,9 +1,10 @@
 import { getCurrentUser } from "@/actions/onboarding";
 import { redirect } from "next/navigation";
 import React from "react";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@components/ui/card";
-import Link from "next/link";
 import { XCircle, ClipboardCheck, AlertCircle } from "lucide-react";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 
 const VerificationPage = async () => {
