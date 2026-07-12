@@ -181,7 +181,7 @@ export default function Home() {
                          className="bg-emerald-600 text-white hover:bg-emerald-700"
                          asChild
                       >
-                        <Link href= "/onboarding">Sign Up Now</Link>
+                        <Link href= "/onboarding">Complete the pending information reqired</Link>
                       </Button>
                       <Button
                          asChild

@@ -32,6 +32,11 @@ const SpecialitiesPage = () => {
                                     <div>{specialty.icon}</div>
                                 </div>
                                 <h3 className="font-medium text-white">{specialty.name}</h3>
+                                {specialty.subtitle && (
+                                    <span className ="text-xs text-emerald-400 mt-1 font-normal block">
+                                        ({specialty.subtitle})
+                                    </span>
+                                )}
 
                             </CardContent>
                         </Card>
