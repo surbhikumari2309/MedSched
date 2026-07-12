@@ -262,3 +262,46 @@ export async function bookAppointment(formData) {
         throw new Error("Failed to book appointment: " + error.message);
     }
 }
+
+export async function getPatientAppointments() {
+    const { userId } = await auth();
+
+    if (!userId) {
+        throw new Error("Unauthorized");
+    }
+
+    try {
+        const patient = await db.user.findUnique({
+            where: {
+                clerkUserId: userId,
+            },
+        });
+
+        if (!patient) {
+            throw new Error("user not found");
+        }
+
+        const appointments = await db.appointment.findMany({
+            where: {
+                patientId: patient.id,
+            },
+            include: {
+                doctor: {
+                    select: {
+                        name: true,
+                        specialty: true,
+                        imageUrl: true,
+                    },
+                },
+            },
+            orderBy: {
+                startTime: "desc",
+            },
+        });
+        return { appointments };
+         
+    } catch (error) {
+        console.error("Failed to fetch appointments:", error);
+        return { appointments: []};
+    }
+}
