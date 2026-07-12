@@ -7,7 +7,8 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import { setAvilabilitySlots } from "@/actions/doctor";
+import { setAvailabilitySlots } from "@/actions/doctor";
+
 import useFetch from "@/hooks/use-fetch";
 import { Clock, Plus, Loader2 } from "lucide-react";
 import React, { useState, useEffect } from "react";
@@ -88,7 +89,7 @@ const AvailabilitySettings = ({ slots }) => {
     const getEndTimeString = (startTimeString) => {
         try {
             const start = new Date(startTimeString);
-            const end = new Date(start.getTime() 60 * 60 * 1000); 
+            const end = new Date(start.getTime() + 60 * 60 * 1000);
             return format(end, "h:mm a");
         } catch (e) {
             return "Invalid time"
@@ -237,3 +238,5 @@ const AvailabilitySettings = ({ slots }) => {
 
     );
 };
+
+export default AvailabilitySettings;

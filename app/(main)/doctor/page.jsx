@@ -4,6 +4,7 @@ import React from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Calendar, Clock } from "lucide-react";
 import AvailabilitySettings from "./_components/availability-settings";
+
 import { redirect } from "next/navigation";
 
 const DoctorDashboard = async () => {
@@ -34,7 +35,7 @@ const DoctorDashboard = async () => {
                     </TabsTrigger>
 
                   <TabsTrigger 
-                     value= "Availability"
+                     value= "availability"
                      className= "flex-1 md:flex md:items-center md:justify-start md:px-4 md:py-3 w-full"
                   >
                     <Clock className="h-4 w-4 mr-2 hidden md:inline" />
