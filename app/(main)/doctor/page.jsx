@@ -4,7 +4,7 @@ import React from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Calendar, Clock } from "lucide-react";
 import AvailabilitySettings from "./_components/availability-settings";
-
+import DoctorAppointments from "./_components/doctor-appointments";
 import { redirect } from "next/navigation";
 
 const DoctorDashboard = async () => {
@@ -44,10 +44,10 @@ const DoctorDashboard = async () => {
 
                 </TabsList>
                 
-                <TabsContent value= "appointments" className="border-none p-0">
-                    to-do
+                <TabsContent value= "appointments" className=" md:col-span-3 border-none p-0">
+                    <DoctorAppointments appointments={appointmentsData.appointments || []} />
                 </TabsContent>
-                <TabsContent value= "availability">
+                <TabsContent value= "availability" className="md:col-span-3 border-none p-0">
                     <AvailabilitySettings slots={availabilityData.slots || []} />
                 </TabsContent>
              </Tabs>

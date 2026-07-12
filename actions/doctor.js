@@ -112,6 +112,47 @@ export async function getDoctorAvailability() {
     }
 }
 
+
 export async function getDoctorAppointments() {
-    return [];
+    const { userId } = await auth();
+
+    if (!userId) {
+        throw new Error("Unauthorized");
+    }
+
+    try {
+        const doctor = await db.user.findUnique({
+            where: {
+                clerkUserId: userId,
+            },
+        });
+
+        if (!doctor || doctor.role !== "DOCTOR") {
+            throw new Error("Doctor not found");
+        }
+
+        const appointments = await db.appointment.findMany({
+            where: {
+                doctorId: doctor.id,
+            },
+            include: {
+                patient: {
+                    select: {
+                        name: true,
+                        email: true,
+                        imageUrl: true,
+                    },
+                },
+            },
+            orderBy: {
+                startTime: "asc",
+            },
+        });
+
+        return { appointments };
+
+    } catch (error) {
+        console.error("Failed to fetch doctor appointments:", error);
+        return { appointments: [] };
+    }
 }
