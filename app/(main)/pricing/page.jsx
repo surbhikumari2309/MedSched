@@ -4,14 +4,22 @@ import { ArrowLeft } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { getCurrentUser } from "@/actions/onboarding";
 import PricingCards from "./_components/pricing-cards";
+import { db } from "@/lib/prisma";
 
 const PricingPage = async () => {
-    // Fetch user server-side to get current credits
+    
     let user = null;
+    let transactions = [];
     try {
         user = await getCurrentUser();
+        if (user) {
+            transactions = await db.creditTransaction.findMany({
+                where: { userId: user.id },
+                orderBy: { createdAt: "desc" },
+            });
+        }
     } catch (e) {
-        // User not logged in, user remains null
+        
     }
 
     return (
@@ -42,7 +50,7 @@ const PricingPage = async () => {
                     Choose the perfect consultation package that fits your healthcare needs with no hidden fees or long term commitments
                 </p>
 
-                <PricingCards initialCredits={user?.credits} />
+                <PricingCards initialCredits={user?.credits} transactions={transactions} />
             </div>
 
             <div className="max-w-3xl mx-auto mt-16 text-center">
@@ -50,7 +58,7 @@ const PricingPage = async () => {
                     Questions? We're here to Help
                 </h2>
                 <p className="text-muted-foreground mb-4">
-                    Contact our support team at support@medsched.com
+                    Contact our support team at coming soon.
                 </p>
             </div>
         </div>

@@ -35,16 +35,16 @@ const SlotPicker = ({ days, onSelectSlot }) => {
               onValueChange={setActiveTab}
               className="w-full"
             >
-                <TabsList className="w-full justify-start overflow-x-auto">
+                <TabsList className="w-full justify-start overflow-x-auto flex-nowrap [&::-webkit-scrollbar]:hidden">
                     {days.map((day) => {
                         return (
                            <TabsTrigger
                               key={day.date}
                               value={day.date}
                               disabled={day.slots.length === 0}
-                              className={
-                                 day.slots.length === 0 ? "opacity-50 cursor-not-allowed" : ""
-                              }
+                              className={`shrink-0 ${
+                                           day.slots.length === 0 ? "opacity-50 cursor-not-allowed" : ""
+                              }`}
                            >
                                <div className="flex flex-col items-center">
                                  <span className="text-sm font-semibold text-white">

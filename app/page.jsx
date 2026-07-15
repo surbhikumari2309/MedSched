@@ -14,10 +14,18 @@ import{
   CardDescription,
   CardContent,
 } from "../components/ui/card";
+import { getCurrentUser } from "@/actions/onboarding";
+import { auth } from "@clerk/nextjs/server";
 
 // import {features} from "@/lib/data";
 
-export default function Home() {
+export default async function Home() {
+  const { userId } = await auth();
+  let user = null;
+  if (userId) {
+    user = await getCurrentUser();
+  }
+  const isProfileComplete = user && user.role !== "UNASSIGNED";
   return <div className= "bg-background">
     <section className="relative overflow-hidden py-32">
       <div className= "container mx-auto px-4"> 
@@ -47,33 +55,10 @@ export default function Home() {
 
 
                   </Button>
-                  <Button
-                     asChild
-                     size="lg"
-                     className= "border-emerald-700/30 hover:bg-muted/80">
-
-                     <Link href={"/doctors"}> Find Doctors</Link>
-
-
-                  
-
-                  </Button> <br/>
+                 
                 </div>
             </div>
-          <div className="relative h-[300px] lg:h-[600px] rounded-xl overflow-hidden mt-4">
-            <Image 
-              src="/bannerFinal.0.png"
-              alt="Doctor consultation"
-              fill
-              priority
-              className=" h-object-cover md:pt-14 rounded-xl"
-            />
-
-            
-            
-
-          </div>
-
+         
           <section className="py-20 bg-muted/30">
               <div className="container mx-auto px-4">
                 <div className="text-center mb-16">
@@ -162,7 +147,10 @@ export default function Home() {
               </div>
           </section>
 
-          <section className="py-20">
+          {!isProfileComplete && (
+            <section className= "py-20">
+
+          
             <div className="container mx-auto px-4">
               <Card className="bg-gradient-to-r from-emerald-900/30 to-emerald-950/20 border-emerald-800/20">
                 <CardContent className="p-8 md:p-12 lg:p-16 relative overflow-hidden">
@@ -181,7 +169,7 @@ export default function Home() {
                          className="bg-emerald-600 text-white hover:bg-emerald-700"
                          asChild
                       >
-                        <Link href= "/onboarding">Complete the pending information reqired</Link>
+                        <Link href= "/onboarding">Get Started</Link>
                       </Button>
                       <Button
                          asChild
@@ -196,7 +184,8 @@ export default function Home() {
                 </CardContent>
               </Card>
             </div>
-          </section>
+           </section>
+         )}
         </div>
       </div>
     </section>

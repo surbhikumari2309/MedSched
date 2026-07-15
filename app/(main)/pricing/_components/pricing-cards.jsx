@@ -103,54 +103,8 @@ export default function PricingCards({ initialCredits, transactions: initialTran
     }, [loading]);
 
     
-    const getEnrichedTransactions = () => {
-        const list = [...transactions];
-        const mockItems = [
-            {
-                id: "mock-1",
-                amount: 2,
-                type: "ADMIN_ADJUSTMENT",
-                packageId: "signup_bonus",
-                createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3).toISOString()
-            },
-            {
-                id: "mock-2",
-                amount: 5,
-                type: "CREDIT_PURCHASE",
-                packageId: "starter",
-                createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2).toISOString()
-            },
-            {
-                id: "mock-3",
-                amount: -2,
-                type: "APPOINTMENT_DEDUCTION",
-                packageId: null,
-                createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 1).toISOString() 
-            },
-            {
-                id: "mock-4",
-                amount: 12,
-                type: "CREDIT_PURCHASE",
-                packageId: "professional",
-                createdAt: new Date(Date.now() - 1000 * 60 * 30).toISOString() 
-            }
-        ];
-
-        let i = 0;
-        while (list.length < 4 && i < mockItems.length) {
-            
-            const mock = mockItems[i];
-            if (!list.some(item => item.packageId === mock.packageId && item.type === mock.type)) {
-                list.push(mock);
-            }
-            i++;
-        }
-
-        
-        return list.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-    };
-
-    const displayTransactions = getEnrichedTransactions();
+    
+    const displayTransactions = transactions.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
     return (
         <div className="space-y-12">

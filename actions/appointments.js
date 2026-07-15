@@ -162,8 +162,8 @@ export async function bookAppointment(formData) {
             },
         });
 
-        if (!patient || patient.role !== "PATIENT") {
-            throw new Error("Patient not found");
+         if (!patient || patient.role !== "PATIENT") {
+            throw new Error("Please complete your profile to book appointments.");
         }
 
         const doctorId = formData.get("doctorId");

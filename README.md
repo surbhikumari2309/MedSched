@@ -50,6 +50,7 @@ Future support for high-quality video calls.
 ### Bugs
 - User must complete profile before booking appointments or doing other other stuff.
 - Last slot as per timings set by a docotr is sometimes not visible
+- Several small UI bugs but they're not functionally problematic
   
 ## AI Usage
 - Debugging 

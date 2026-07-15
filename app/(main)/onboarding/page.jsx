@@ -75,7 +75,7 @@ const OnboardingPage = () => {
     useEffect(() => {
         if (data && data?.success) {
             toast.success("Role Selected");
-            router.push(data.redirect);
+            window.location.href = data.redirect;
         }
     }, [data]);
 

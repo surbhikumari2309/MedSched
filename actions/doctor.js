@@ -64,7 +64,7 @@ export async function setAvailabilitySlots(formData) {
             },
         });
 
-        revalidatePath("/doctor");
+        revalidatePath("/", "layout");
         return { success: true, slot: newSlot };
 
 

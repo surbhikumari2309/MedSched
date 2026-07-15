@@ -4,30 +4,30 @@ import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 
-// export async function verifyAdmin() {
-//     const { userId } = await auth();
+export async function verifyAdmin() {
+    const { userId } = await auth();
 
-//     if (!userId) {
-//         return false;
-//     }
+    if (!userId) {
+        return false;
+    }
 
-//     try {
-//         const user = await db.user.findUnique({
-//             where: {
-//                 clerkUserId: userId,
-//             },
-//         });
+    try {
+        const user = await db.user.findUnique({
+            where: {
+                clerkUserId: userId,
+            },
+        });
 
-//         return user?.role === "ADMIN";
-//     } catch (error) {
-//         console.error("Failed to verify admin:", error);
-//         return false;
-//     }
-// }
-
-export async function verifyAdmin(){
-    return true; 
+        return user?.role === "ADMIN";
+    } catch (error) {
+        console.error("Failed to verify admin:", error);
+        return false;
+    }
 }
+
+// export async function verifyAdmin({
+//     return true;
+// })
 
 export async function getPendingDoctors() {
     const isAdmin = await verifyAdmin();

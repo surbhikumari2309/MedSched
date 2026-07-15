@@ -127,7 +127,7 @@ const AvailabilitySettings = ({ slots }) => {
                                 return (
                                     <div
                                        key={slot.id}
-                                       className="flex items-center pt-3 rounded-md bg-muted/20 border border-emerald-900/20"
+                                       className="flex items-center p-3 rounded-md bg-muted/20 border border-emerald-900/20"
                                     >
                                     
                                     <div className="bg-emerald-900/20 p-2 rounded-full mr-3">
@@ -137,7 +137,7 @@ const AvailabilitySettings = ({ slots }) => {
                                     
                                         <p className= "text-white font-medium">
                                             {formatTimeString(slot.startTime)} - {" "}
-                                            {formatTimeString(slot.endTime)}
+                                            
                                             {getEndTimeString(slot.startTime)}
                                         </p>
                                     </div>
