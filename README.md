@@ -6,10 +6,12 @@ MedSched is basically a full-stack healthcare appointment scheduling app that ma
 ## Features
 
 - **Dedicated Portals** :
-Separate Dashboards for Patients, Doctors and Admins.
+Separate Dashboards for Patients and Doctors.
+Admin Dashboard can onlyl be accessed from the backend with login credentials to approve doctors. Not exactly a feature and cannot be tested by third party without local installation.
 
 - **Doctor Verification** :
-Admins can review and verify or reject doctor profiles before they can accept appointments.
+From backend, Admins can review and verify or reject doctor profiles before they can accept appointments.
+To open admin dashboard, go to actions/admin.js -> make lines 28-30 active and comment lines 7-26 then visit localhost:3000/admin in url bar in browser (assuming that the app is running at localhost:3000)
 
 - **Availabillity Management** :
 Doctors can set up and manage their available time slots and the upcoming appointments will be visible to the doctor.
@@ -20,11 +22,13 @@ Patients can browse verified doctors, view available slots and book appointments
 - **Appointment History** :
 Patients and doctors can view upcoming and past consultations.
 
+- **Appointment Rescheduling & Cancellation (Coming Soon)**
+
 - **Video Consultation (Coming Soon)** :
 Future support for high-quality video calls.
 
-## Active Bugs
-None I guess
+- **Payments**:
+  It doesn't support payments yet but it will in the future.
 
 ## Tech Stack
 - **Framework** : Next.js (App Router, v16.2.9)
@@ -36,9 +40,29 @@ None I guess
 - **Notifications** : Sonner
 - **Utilities** : Date-fns, Class Variance Authority (CVA), tailwind-merge, clsx
 
+## Problems
+### Disclaimer
+- Deployment is done while clerk is in development mode. I got to know later that clerk does not allow .vercel.app or such domains
+- Purchase doesn't trigger payment. It automatically adds credits. I will add this in future version
+- Limitation: Appointement booking can only be made upto 4 days in advance. This is by intention but can seem like a bug that's why it is mentioned here.
+- Appointment Rescheduling & Cancellation is not available yet
+  
+### Bugs
+- User must complete profile before booking appointments or doing other other stuff.
+- Last slot as per timings set by a docotr is sometimes not visible
+  
 ## AI Usage
 - Debugging 
 - help with readme file especially how to run locally part
+
+## Screenshots
+<img width="2844" height="1518" alt="Screenshot 2026-07-15 115248" src="https://github.com/user-attachments/assets/d43f37cb-8d2c-48b2-b2a2-a71c72fce177" />
+<img width="2828" height="1506" alt="Screenshot 2026-07-15 115211" src="https://github.com/user-attachments/assets/048df7b6-13f1-40eb-af9c-f52db5d68802" />
+<img width="2880" height="1800" alt="Screenshot 2026-07-15 114631" src="https://github.com/user-attachments/assets/3608d5d6-bc3f-4d74-982f-9493e293113d" />
+<img width="2880" height="1800" alt="Screenshot 2026-07-15 114542" src="https://github.com/user-attachments/assets/4fd0ba0a-281a-49af-8394-3e716d6edc5b" />
+<img width="2822" height="1511" alt="Screenshot 2026-07-14 201130" src="https://github.com/user-attachments/assets/7ed009c4-91ee-48aa-87b7-a7334ae08b11" />
+<img width="2826" height="1490" alt="Screenshot 2026-07-14 190912" src="https://github.com/user-attachments/assets/c4812d74-69fb-4b24-b2ff-b48a8d6c954d" />
+<img width="2834" height="1496" alt="Screenshot 2026-07-14 185443" src="https://github.com/user-attachments/assets/ef739608-1baf-4d04-b04e-0d04ba1d9028" />
 
 ## How to run locally
 - Node.js
